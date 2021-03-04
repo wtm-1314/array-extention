@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   
+    let arr=[1,2,3,4,[12,23,34,[121,232,[111]]]]
+    // 递归处理n层数据数组元素
+    function setArr(arr){
+      // 判断数据类型;
+      if(Object.prototype.toString.call(arr)!=='[object Array]'){
+          return arr
+        }
+      let r=[];
+      arr.forEach((item)=>{
+        if(item.length){
+          set(item)
+        }else{
+          r.push(item)
+        }
+      })
+      // 使用闭包内部定义函数处理对应的递归数据
+      function set(arrs){
+        arrs.forEach((v)=>{
+          if(v.length){
+            set(v)
+          }else{
+            r.push(v)
+          }
+        })
+      }
+      return r
+    }
+    // 调用对应的处理函数处理多层数组元素数据
+    let res=setArr(arr)
+    console.log(res);
+  </script>
+</body>
+</html>
